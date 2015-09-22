@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
-  resources :registrations
-  resources :players
-  resources :tournaments
-  get '/' => 'tournaments#index'
+  root 'tournaments#index'
+
+  namespace :api do
+    resources :tournaments
+  end
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
