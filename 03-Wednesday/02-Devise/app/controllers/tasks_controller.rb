@@ -2,28 +2,32 @@ class TasksController < ApplicationController
 
   # GET /tasks
   def index
-    @tasks = Task.all
+    @tasks = policy_scope(Task)
+    skip_authorization
   end
 
   # GET /tasks/1
   def show
     @task = Task.find(params[:id])
+    skip_authorization
   end
 
   # GET /tasks/new
   def new
     @task = Task.new
+    skip_authorization
   end
 
   # GET /tasks/1/edit
   def edit
     @task = Task.find(params[:id])
+    authorize @task
   end
 
   # POST /tasks
   def create
     @task = Task.new(task_params)
-
+    skip_authorization
     respond_to do |format|
       if @task.save
         format.html { redirect_to @task, notice: 'Task was successfully created.' }
@@ -36,6 +40,7 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1
   def update
     @task = Task.find(params[:id])
+    authorize @task
     respond_to do |format|
       if @task.update(task_params)
         format.html { redirect_to @task, notice: 'Task was successfully updated.' }
@@ -48,6 +53,7 @@ class TasksController < ApplicationController
   # DELETE /tasks/1
   def destroy
     @task = Task.find(params[:id])
+    authorize @task
     @task.destroy
     respond_to do |format|
       format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }

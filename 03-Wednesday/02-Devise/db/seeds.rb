@@ -9,10 +9,10 @@ User.destroy_all
 Task.destroy_all
 
 users = User.create([
-  {name: 'Ian',  email: 'ian@dischord.com', password: '12345678', password_confirmation: '12345678'},
-  {name: 'Henry',  email: 'hank@sst.com', password: '12345678', password_confirmation: '12345678'},
-  {name: 'Glenn', email: 'danzig@plan9.com', password: '12345678', password_confirmation: '12345678'},
-  {name: 'H.R.', email: 'paul@reachoutinternational.com', password: '12345678', password_confirmation: '12345678'}
+  {name: 'Ian',  email: 'ian@dischord.com', password: '12345678', password_confirmation: '12345678', admin: true},
+  {name: 'Henry',  email: 'hank@sst.com', password: '12345678', password_confirmation: '12345678', admin: false},
+  {name: 'Glenn', email: 'danzig@plan9.com', password: '12345678', password_confirmation: '12345678', admin: false},
+  {name: 'H.R.', email: 'paul@reachoutinternational.com', password: '12345678', password_confirmation: '12345678', admin: false}
 ])
 
 tasks = Task.create([
