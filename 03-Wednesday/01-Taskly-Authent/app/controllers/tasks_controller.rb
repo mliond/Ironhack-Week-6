@@ -1,7 +1,10 @@
 class TasksController < ApplicationController
 
+  before_action :require_ownership, only: [:edit, :update, :destroy]
+
   # GET /tasks
   def index
+    # @tasks = current_user.tasks
     @tasks = Task.all
   end
 
@@ -60,4 +63,12 @@ class TasksController < ApplicationController
     def task_params
       params.require(:task).permit(:name, :due_date, :completed, :user_id)
     end
+
+    def require_ownership
+      task = Task.find(params[:id])
+      unless task.user_id == current_user.id
+        redirect_to tasks_path, notice: 'Access forbidden'
+      end
+    end
+
 end

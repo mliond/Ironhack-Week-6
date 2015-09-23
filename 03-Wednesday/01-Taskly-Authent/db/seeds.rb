@@ -5,11 +5,15 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+User.destroy_all
+Task.destroy_all
+
 users = User.create([
-  {name: 'Ian',  email: 'ian@dischord.com'},
-  {name: 'Henry',  email: 'hank@sst.com'},
-  {name: 'Glenn', email: 'danzig@plan9.com'},
-  {name: 'H.R.', email: 'paul@reachoutinternational.com'}
+  {name: 'Ian',  email: 'ian@dischord.com', password: 'hihihihi', password_confirmation: 'hihihihi'},
+  {name: 'Henry',  email: 'hank@sst.com', password: 'testtest', password_confirmation: 'testtest'},
+  {name: 'Glenn', email: 'danzig@plan9.com', password: 'testtest', password_confirmation: 'testtest'},
+  {name: 'H.R.', email: 'paul@reachoutinternational.com', password: 'testtest', password_confirmation: 'testtest'}
 ])
 
 tasks = Task.create([

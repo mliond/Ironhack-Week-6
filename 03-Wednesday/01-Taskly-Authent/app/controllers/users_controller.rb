@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
 
+  skip_before_action :login_required, only: [:new, :create]
+  before_action :require_login, only: [:edit, :update, :destroy]
+
   # GET /users
   def index
     @users = User.all
@@ -55,9 +58,17 @@ class UsersController < ApplicationController
   end
 
   private
-  
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :email)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
+
+    def require_login
+      @user = User.find(params[:id])
+      unless @user == current_user
+        redirect_to users_path, notice: 'Access forbidden'
+      end
+    end
+
 end

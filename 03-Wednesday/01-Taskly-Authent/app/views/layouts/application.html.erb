@@ -7,6 +7,18 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <div id="top_bar">
+    <% if logged_in? %>
+      <p>Hello,  <%= current_user.name %> - 
+      <%= link_to 'Logout', logout_path, method: 'DELETE' %></p>
+    <% else %>
+      <p>
+          <%= link_to 'Signup', signup_path %> |
+          <%= link_to 'Login', login_path %>
+      </p>
+    <% end %>
+  </div>
+
 
 <%= yield %>
 
