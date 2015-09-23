@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Auctions</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<% unless session[:user_id].nil? %>
+  <p>
+    <% @current_user = User.find(session[:user_id]) %>
+    Welcome, you are logged in as <%= @current_user.name %><br>
+    <%= link_to "Log out", session_path(@current_user), method: :delete %>
+  </p>
+
+<% end %>
+
+<%= yield %>
+
+</body>
+</html>

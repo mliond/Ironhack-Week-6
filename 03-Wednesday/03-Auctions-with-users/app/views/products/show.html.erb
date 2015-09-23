@@ -1,0 +1,38 @@
+<h1><%= @product.name %> Details:</h1>
+
+<p>
+  Name: 
+  <%= @product.name %>
+</p>
+
+<p>
+  Description:
+  <%= @product.description %>
+</p>
+
+<p>
+  Minimum Price:
+  <%= @product.min_price %>
+</p>
+
+<p>
+  Deadline:
+  <%= @product.deadline %>
+</p>
+
+<p>
+  Bids: 
+  <ul>
+  <% @product.bids.each do |bid| %>
+    <li>
+      <%= bid.user.name %>: $<%= bid.amount %>
+    </li>
+  <% end %>
+  </ul>
+</p>
+
+<% if @product.deadline > Time.now %>
+  <p><%= link_to "Make a bid", new_product_bid_path(@product) %></p>
+<% else %>
+  <p>The auction was won by: <%= @highest_bidder %>!!</p>
+<% end %>

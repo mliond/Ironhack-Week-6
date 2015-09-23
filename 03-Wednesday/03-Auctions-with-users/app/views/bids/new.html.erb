@@ -1,0 +1,10 @@
+<% @user_id = session[:user_id] %>
+
+<h1>Make a new bid on <%= @product.name %></h1>
+
+<%= form_for [@product, @bid] do |f| %>
+  <%= f.label :amount %>
+  <%= f.number_field :amount %>
+  <%= f.hidden_field :user_id, value: @user_id %> 
+  <%= f.submit "Confirm bid" %>
+<% end %>
