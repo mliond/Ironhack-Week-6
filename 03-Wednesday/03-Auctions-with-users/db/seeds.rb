@@ -9,6 +9,7 @@ num.times do |i|
   u = User.new({
     name: Faker::Internet.user_name,
     password: "test",
+    password_confirmation: "test",
     email: Faker::Internet.email
     })
   u.save
