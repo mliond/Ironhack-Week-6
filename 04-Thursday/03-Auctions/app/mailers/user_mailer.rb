@@ -5,4 +5,5 @@ class UserMailer < ApplicationMailer
     @product = product
     mail(to: @user.email, subject: 'Congrats on your purchase of #{@product.name}')
   end
+    handle_asynchronously :purchase
 end
