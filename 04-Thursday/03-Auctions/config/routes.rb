@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root to: 'users#show'
   resources :users
   resources :products do
+    get '/purchase', to: 'products#purchase'
     resources :reviews
     resources :bids
   end

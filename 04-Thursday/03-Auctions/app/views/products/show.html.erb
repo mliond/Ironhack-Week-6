@@ -13,6 +13,8 @@
   Seller: <%= User.find(@product.user_id).email %>
 </p>
 
+<h3><%= link_to "Buy now", product_purchase_path(product_id: @product.id) %></h3>
+
 <h3>Make a bid:</h3>
 <% if @product.deadline > Time.now %>
   <%= form_for [@product, @bid] do |f| %>
@@ -32,7 +34,6 @@
   <li>
     <%= review.user.email %>
     <%= review.description %>
-
   </li>
   <% end %>
   <li>
