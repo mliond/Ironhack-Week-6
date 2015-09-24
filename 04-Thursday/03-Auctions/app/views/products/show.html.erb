@@ -1,0 +1,47 @@
+<h1>Product details</h1>
+
+<p>
+  Name: <%= @product.name %>
+</p>
+<p>  
+  Min. Price: <%= @product.minprice %>
+</p>
+<p>
+  Deadline: <%= @product.deadline.strftime("%D") %>
+</p>
+<p>
+  Seller: <%= User.find(@product.user_id).email %>
+</p>
+
+<h3>Make a bid:</h3>
+<% if @product.deadline > Time.now %>
+  <%= form_for [@product, @bid] do |f| %>
+    <%= f.label :amount %>
+    <%= f.number_field :amount %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.hidden_field :product_id, value: @product.id %>
+    <%= f.submit 'Confirm' %>
+  <% end %>
+<% else %>
+  The winner is: <%= @highest_bid.user.email %> with <%= @highest_bid.amount %>
+<% end %>
+
+<h3>Reviews:</h3>
+<ul>
+  <% @product.reviews.each do |review| %>
+  <li>
+    <%= review.user.email %>
+    <%= review.description %>
+
+  </li>
+  <% end %>
+  <li>
+    <%= form_for [@product, @review] do |f| %>
+      <%= f.label :description %>
+      <%= f.text_field :description %>
+      <%= f.hidden_field :user_id, value: current_user.id %>
+      <%= f.hidden_field :product_id, value: @product.id %>
+      <%= f.submit 'Submit' %>
+    <% end %>
+  </li>
+</ul>

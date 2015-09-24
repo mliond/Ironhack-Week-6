@@ -1,0 +1,33 @@
+<h1>All products</h1>
+
+<table>
+  <tr>
+    <td>Name</td>
+    <td>Min. Price</td>
+    <td>Seller</td>
+    <td>Bids</td>
+  </tr>
+  <% @products.each do |p| %>
+    <tr>
+      <td>
+        <%= link_to p.name, product_path(p) %>
+      </td>
+      <td>
+        <%= p.minprice %>
+      </td>
+      <td>
+        <%= User.find(p.user_id).email %>
+      </td>
+      <td>
+        <ul>
+          <% p.bids.each do |b| %>
+            <li>
+              <%= b.user.email %>
+              <%= b.amount %>
+            </li>
+          <% end %>
+        </ul>
+      </td>
+    </tr>
+  <% end %>
+</table>
